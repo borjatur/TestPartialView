@@ -1,0 +1,27 @@
+﻿<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.btn').click(function(event) {
+            event.preventDefault();
+            var dataToSend = { data: $('input[name=DATA]').val() };
+            var url = "@Url.Action("TestAjax","Home")";
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                type: 'POST',
+                url: url,
+                data: JSON.stringify(dataToSend),
+                success: function (data) {
+                    $('.form-group').append("<div>My value submited is "+data+"</div>");
+                },
+                failure: function (data) {
+                
+                }
+            });
+        });
+    });
+</script>
+<div class="form-group col-lg-3 col-md-3 col-xs-3">
+    <label for="DATA">DATA:</label>
+    <input type="text" class="form-control pull-right" name="DATA"/>
+</div>
+<button type="submit" class="btn btn-primary pull-right">Get Data</button>
